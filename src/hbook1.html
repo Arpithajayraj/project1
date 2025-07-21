@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Registration Form</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+          padding: 30px;
+        }
+        .form-container {
+          background-color: #fff;
+          padding: 25px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px #ccc;
+          max-width: 500px;
+          margin: auto;
+        }
+        h2 {
+          text-align: center;
+        }
+        input, select, textarea {
+          width: 100%;
+          padding: 10px;
+          margin-top: 8px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+        input[type="submit"] {
+          background-color: #4CAF50;
+          color: white;
+          cursor: pointer;
+        }
+        input[type="submit"]:hover {
+          background-color: #45a049;
+        }
+        .success-message {
+          color: green;
+          font-weight: bold;
+          text-align: center;
+          display: none;
+          margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Hotel Registration Form</h2>
+    <form id="bookingForm">
+        <label>Full Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Phone Number:</label>
+        <input type="tel" name="phone" required>
+
+        <label>Check-in Date:</label>
+        <input type="date" name="checkin" required>
+
+        <label>Check-out Date:</label>
+        <input type="date" name="checkout" required>
+
+        <label>Room Type:</label>
+        <select name="room">
+            <option value="single">Single</option>
+            <option value="double">Double</option>
+            <option value="suite">Suite</option>
+        </select>
+
+        <label>Number of Guests:</label>
+        <input type="number" name="guests" min="1" max="10">
+
+
+
+        <input type="submit" value="BOOK">
+    </form>
+
+    <div class="success-message" id="successMessage">
+        ✅ Booking Successfully!
+    </div>
+</div>
+
+<script>
+    const form = document.getElementById("bookingForm");
+    const successMsg = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+      successMsg.style.display = "block";
+      form.reset();
+    });
+</script>
+
+</body>
+</html>

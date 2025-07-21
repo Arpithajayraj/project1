@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flight Booking Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      padding: 20px;
+    }
+    .booking-form {
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      background-color: #fff;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .success-message {
+      text-align: center;
+      color: green;
+      font-size: 18px;
+      margin-top: 15px;
+      display: none;
+    }
+    #downloadBtn {
+      display: none;
+      background-color: #007BFF;
+    }
+    #downloadBtn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="booking-form">
+  <h2>Flight Booking Form</h2>
+  <form id="flightForm">
+    <label for="fullname">Full Name:</label>
+    <input type="text" id="fullname" name="fullname" required>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" required>
+
+    <label for="from">From:</label>
+    <input type="text" id="from" name="from" required>
+
+    <label for="to">To:</label>
+    <input type="text" id="to" name="to" required>
+
+    <label for="departure">Departure Date:</label>
+    <input type="date" id="departure" name="departure" required>
+
+    <label for="class">Class:</label>
+    <select id="class" name="class" required>
+      <option value="">--Select Class--</option>
+      <option value="Economy">Economy</option>
+      <option value="Business">Business</option>
+      <option value="First Class">First Class</option>
+    </select>
+
+    <label for="passengers">Number of Passengers:</label>
+    <input type="number" id="passengers" name="passengers" min="1" max="10" required>
+
+    <button type="submit">Book Flight</button>
+  </form>
+
+  <div class="success-message" id="successMessage">
+    ✅ Booking submitted successfully!<br>
+    🎟️ Click below to download your ticket.
+  </div>
+  <button id="downloadBtn">Download Ticket</button>
+</div>
+
+<script>
+  const form = document.getElementById('flightForm');
+  const message = document.getElementById('successMessage');
+  const downloadBtn = document.getElementById('downloadBtn');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    message.style.display = 'block';
+    downloadBtn.style.display = 'block';
+  });
+
+  downloadBtn.addEventListener('click', function () {
+    const fullname = document.getElementById('fullname').value;
+    const from = document.getElementById('from').value;
+    const to = document.getElementById('to').value;
+    const date = document.getElementById('departure').value;
+    const ticket = `Flight Ticket\n\nPassenger: ${fullname}\nFrom: ${from}\nTo: ${to}\nDate: ${date}\n\nStatus: Confirmed`;
+
+    const blob = new Blob([ticket], { type: 'text/plain' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'flight_ticket.txt';
+    link.click();
+  });
+</script>
+
+</body>
+</html>
